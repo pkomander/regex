@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronometro</title>
+</head>
+<body>
+    
+    <div id="container">
+        <section id="sectionForm">
+            <form name="form_main" id="form">
+                <div id="divSpan">
+                    <span id="hour">00</span>:<span id="minute">00</span>:<span id="second">00</span>:<span id="millisecond">000</span>
+                </div>
+            
+                <br />
+                <div id="divButton">
+                    <button type="button" name="start" id="start">start</button>
+                    <button type="button" name="pause" id="pause">pause</button>
+                    <button type="button" name="reset" id="reset">reset</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+
+    <style>
+        #container{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(#6C7A89, rgb(180, 118, 118))
+        }
+
+        #sectionForm{
+            width: 50%;
+            height: 50%;
+            background-color: rgb(65, 60, 60);
+            font-size: 25px;
+            border-radius: 10px;
+        }
+
+        #form{
+            width: 50vw;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        #divSpan,#divButton{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: white; 
+        }
+
+        #start,#pause,#reset{
+            padding: 5px 10px;
+            margin: 5px;
+        }
+
+        #start{
+            background-color: rgb(93, 223, 132);
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        #pause{
+            background-color: rgb(201, 191, 52);
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        #reset{
+            background-color: rgb(172, 111, 111);
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</body>
+<script>
+
+    let hour = 0;
+    let minute = 0;
+    let second = 0;
+    let millisecond = 0;
+
+    document.form_main.start.onclick = () => start();
+    document.form_main.pause.onclick = () => pause();
+    document.form_main.reset.onclick = () => reset();
+
+    let cron;
+
+
+    function start(){
+        pause();
+        cron = setInterval(() => {timer();}, 10);
+    }
+
+    function pause(){
+        clearInterval(cron)
+    }
+
+    function reset(){
+        hour = 0;
+        minute = 0;
+        second = 0;
+        millisecond = 0;
+        document.getElementById('hour').innerText = '00';
+        document.getElementById('minute').innerText = '00';
+        document.getElementById('second').innerText = '00';
+        document.getElementById('millisecond').innerText = '000';
+    }
+
+    function timer() {
+        if ((millisecond += 10) == 1000) {
+            millisecond = 0;
+            second++;
+        }
+        if (second == 60) {
+            second = 0;
+            minute++;
+        }
+        if (minute == 60) {
+            minute = 0;
+            hour++;
+        }
+
+        document.getElementById('hour').innerText = returnData(hour);
+        document.getElementById('minute').innerText = returnData(minute);
+        document.getElementById('second').innerText = returnData(second);
+        document.getElementById('millisecond').innerText = returnData(millisecond);
+    }
+
+    function returnData(input) {
+        return input > 10 ? input : `0${input}`
+    }
+</script>
+</html>
