@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container">
+        <p></p>
+    </div>
+
+
+
+    <script>
+
+        var container = document.querySelector(".container");
+
+        fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados/BA/distritos')
+        .then(response => response.json())
+        .then(json => console.log(json))
+        .then(function(json){
+            console.log(json);
+            json.results.map(function(val){
+                for(var i = 0; i < json.lenght;i++)
+                container.innerHTML += `
+                    <p>`+val.nome+`</p>
+                `
+            })
+        })
+
+    </script>
+</body>
+</html>

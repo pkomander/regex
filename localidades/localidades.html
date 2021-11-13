@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <select name="estados" id="estados" onchange="Estado()">
+        <option value=""></option>
+        <option value="AC">Acre</option>
+        <option value="AL">Alagoas</option>
+        <option value="AP">Amapá</option>
+        <option value="AM">Amazonas</option>
+        <option value="BA">Bahia</option>
+        <option value="CE">Ceará</option>
+        <option value="ES">Espirito Santo</option>
+        <option value="GO">Goiás</option>
+        <option value="MA">Maranhão</option>
+        <option value="MT">Mato Grosso</option>
+        <option value="MS">Mato Grosso do Sul</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="PA">Pará</option>
+        <option value="PB">Paraíba</option>
+        <option value="PR">Paraná</option>
+        <option value="PE">Pernambuco</option>
+        <option value="PI">Piaui</option>
+        <option value="RJ">Rio de Janeiro</option>
+        <option value="RN">Rio Grande do Norte</option>
+        <option value="RS">Rio Grande do Sul</option>
+        <option value="RO">Rondônia</option>
+        <option value="RR">Roraima</option>
+        <option value="SC">Santa Catarina</option>
+        <option value="SP">São Paulo</option>
+        <option value="SE">Sergipe</option>
+        <option value="TO">Tocantins</option>
+        <option value="DF">Distrito Federal</option>
+    </select>
+
+    <select name="municipios" id="municipios">
+        
+    </select>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous">
+    </script>
+
+</body>
+<script>
+    function Estado(){
+        var select = document.querySelector('#estados');
+        var value = select.options[select.selectedIndex].value;
+        console.log(value);
+        atualizaMunicipio(value)
+        return value;
+    }
+
+    // var UF = Estado();
+    
+
+    function atualizaMunicipio(value){
+        let url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+value+'/distritos?orderBy=nome';
+
+        //requisição JSON
+        $.getJSON(url, function(data){
+            let conteudo = '<optiongroup>';
+            $.each(data, function(v,val){
+                conteudo += '<option>'+val.nome+'</option>'
+            });
+            conteudo += '</optiongroup>';
+
+            $("#municipios").html(conteudo);
+        });
+    }
+    
+
+</script>
+</html>
+

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="box-calculadora">
+            <!-- <h2>ola</h2> -->
+            <div id="resultado-calculo">
+                <span>0</span>
+            </div>
+
+            <!-- <div id="operadores">
+                <p>%</p>
+                <p>C</p>
+                <p>%</p>
+                <p><-</p>
+                <p>7</p>
+                <p>8</p>
+                <p>9</p>
+                <p>X</p>
+                <p>4</p>
+                <p>5</p>
+                <p>6</p>
+                <p>-</p>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>+</p>
+                <p>+/-</p>
+                <p>0</p>
+                <p>,</p>
+                <p id="igual">=</p>
+            </div> -->
+            <table>
+                <thead>
+                    <tr id="op">
+                        <th onclick="operador('/')">/</th>
+                        <th>CE</th>
+                        <th id="limpar" onclick="limpaCampo()">C</th>
+                        <th><-</th>
+                    </tr>
+                    <tr>
+                        <th class="numeros" onclick="verificaNumero(7)">7</th>
+                        <th class="numeros" onclick="verificaNumero(8)">8</th>
+                        <th class="numeros" onclick="verificaNumero(9)">9</th>
+                        <th id="op" onclick="operador('X')">X</th>
+                    </tr>
+                    <tr>
+                        <th class="numeros" onclick="verificaNumero(4)">4</th>
+                        <th class="numeros" onclick="verificaNumero(5)">5</th>
+                        <th class="numeros" onclick="verificaNumero(6)">6</th>
+                        <th id="op" onclick="operador('-')">-</th>
+                    </tr>
+                    <tr>
+                        <th class="numeros" onclick="verificaNumero(1)">1</th>
+                        <th class="numeros" onclick="verificaNumero(2)">2</th>
+                        <th class="numeros" onclick="verificaNumero(3)">3</th>
+                        <th id="op" onclick="operador('+')">+</th>
+                    </tr>
+                    <tr>
+                        <th>+/-</th>
+                        <th class="numeros" onclick="verificaNumero(0)">0</th>
+                        <th>,</th>
+                        <th id="op-igual">=</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <style>
+
+        .container{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: initial;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(#6C7A89, rgb(180, 118, 118))
+        }
+
+        .box-calculadora{
+            background-color: whitesmoke;
+            width: 25vw;
+            height: 90vh;
+            border-radius: 5px;
+        }
+
+        #resultado-calculo{
+            width: 25vw;
+            height: 10vw;
+            background-color: rgb(231, 223, 223);
+            border-radius: 5px;
+        }
+
+        table thead tr th{
+            color: rgb(12, 11, 11);
+            border: 0.1px solid white;
+            border-radius: 5px;
+            font-size: 20px;
+            padding: 30px;
+        }
+
+        /* #operadores{
+            display: flex;
+            order: 4;
+            flex-direction: row;
+            flex-grow: 4;
+            flex-wrap: wrap;
+            padding-left: 10px;
+        }
+
+        #operadores p{
+            border: 1px solid red;
+            border-radius: 5px;
+            display: flex;
+            padding: 20px;
+            margin: 15px;
+            width: 1vh;
+            align-items: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+        } */
+
+        #op{
+            background-color: rgb(228, 220, 220);
+        }
+        #op-igual{
+            background-color: skyblue;
+        }
+
+        #resultado-calculo{
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        #resultado-calculo span{
+            display: flex;
+            justify-content: flex-end;
+            font-size: 60px;
+        }
+    </style>
+</body>
+
+<script>
+    function verificaNumero (valor){
+        var numero = document.querySelector("#resultado-calculo span");
+        var op =  operador();
+        console.log(op);
+
+        if(numero.innerHTML == "0"){
+            numero.innerHTML = "";
+        }
+
+        if( op == null){
+            numero.innerHTML += valor;
+        }
+        else if (op != null){
+            numero.innerHTML += valor + op;
+        }
+
+    }
+
+    function limpaCampo(){
+        var numero = document.querySelector("#resultado-calculo span").innerHTML = 0;
+        
+    }
+
+    function operador(op){
+        var operador = op;
+        console.log(operador);
+        return operador;
+    }
+
+    // var a = 1;
+    // var b = 2;
+    // var resultado = soma(a,b);
+    // console.log(resultado);
+
+    // function soma(a, b){
+    //     var soma = a + b;
+    //     return soma;
+    // }
+</script>
+</html>
